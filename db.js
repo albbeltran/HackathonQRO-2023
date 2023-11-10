@@ -5,5 +5,5 @@ const { createClient } = require('@supabase/supabase-js');
 const supabaseUrl = process.env.SUPABASE_URL;
 const supabaseKey = process.env.SUPABASE_KEY;
 const supabase = createClient(supabaseUrl, supabaseKey);
-//Exports the db client
+//Exporta el cliente de bd
 module.exports = supabase;
