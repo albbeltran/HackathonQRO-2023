@@ -1,5 +1,6 @@
 const express = require('express');
 const dotenv = require('dotenv');
+const supabase = require('./db');
 
 dotenv.config();
 
@@ -10,7 +11,17 @@ app.get('/', (req, res) => {
     res.json('Bienvenido al servidor!');
 })
 
-app.post('/report', (req, res) => {
+app.post('/report', async (req, res) => {
+    const { error } = await supabase
+        .from('products')
+        .insert({
+            name: 'Testing',
+            description: 'Description',
+            price: '19',
+        })
+    if (error) {
+        res.send(error);
+    }
     res.json('Reporte subido!');
 })
 
