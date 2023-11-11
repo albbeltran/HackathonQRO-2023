@@ -7,6 +7,7 @@ export default class Form {
         this.tipoReporte = document.querySelector('#FormControlSelect');
         this.descripcion = document.querySelector('#descripcion');
         this.keywordsPersona = document.querySelector('#keywords-persona');
+        this.keywordsCoche = document.querySelector('#keywords-coche');
         this.events();
     }
 
@@ -86,7 +87,20 @@ export default class Form {
       
           ${this.descripcion.value}
       
-          El color deberá devolverse con un HEX.
+          El color deberá devolverse con un HEX en mayúsculas.
+
+          Únicamente utiliza los siguientes colores:
+
+          #FFFFFF: BLANCO
+          #000000: NEGRO
+          #0000FF: AZUL
+          #FF0000: ROJO
+          #008000: VERDE
+          #FFA500: NARANJA
+          #FFFF00: AMARILLO
+          #FFC0CB: ROSA
+          #800080: MORADO
+          #A0522D: CAFE
       
           Los tipos deberán devolverse como int con los siguientes códigos:
       
@@ -98,7 +112,7 @@ export default class Form {
           Si una palabra clave no es explícita en la descripción, asigna null.
         `
 
-        this.extraerPalabrasClave(mensaje);
+        this.getPalabrasCoche(mensaje);
     }
 
     async extraerPalabrasClave(mensaje) {
@@ -109,6 +123,11 @@ export default class Form {
     async getPalabrasPersona(mensaje) {
         const data = await this.extraerPalabrasClave(mensaje);
         this.renderPalabrasPersona(data);
+    }
+
+    async getPalabrasCoche(mensaje) {
+        const data = await this.extraerPalabrasClave(mensaje);
+        this.renderPalabrasCoche(data);
     }
 
     renderPalabrasPersona(data) {
@@ -131,16 +150,34 @@ export default class Form {
             colorPlayeraNombre = this.hexANombre(data.color_playera);
             colorPlayera.value = colorPlayeraNombre;
         } else colorPiel.value = data.color_playera;
-        
+
         if (data.color_pantalon) {
             colorPantalonNombre = this.hexANombre(data.color_pantalon);
             colorPantalon.value = colorPantalonNombre;
         } else colorPantalon.value = data.color_pantalon;
-        
+
         largoMangas.value = data.largo_mangas;
         largoPantalon.value = data.largo_pantalon;
 
         console.log(colorPiel.value, colorPlayera.value, largoMangas.value, colorPantalon.value, largoPantalon.value);
+    }
+
+    renderPalabrasCoche(data) {
+        this.keywordsCoche.style.display = 'block';
+
+        let colorVehiculo = document.querySelector('#colorVehiculo');
+        let tipoVehiculo = document.querySelector('#tipoVehiculo');
+
+        let colorVehiculoNombre;
+
+        if (data.color_vehiculo) {
+            colorVehiculoNombre = this.hexANombre(data.color_vehiculo);
+            colorVehiculo.value = colorVehiculoNombre;
+        } else colorVehiculo.value = data.color_vehiculo;
+
+        tipoVehiculo.value = data.tipo_vehiculo;
+
+        console.log(colorVehiculo.value, tipoVehiculo.value);
     }
 
     async subirReporte(data) {
@@ -177,8 +214,6 @@ export default class Form {
             "#800080": "MORADO",
             "#A0522D": "CAFE"
         };
-
-        console.log('COLOR HEX: ', colors[hex])
 
         if (colors[hex]) return colors[hex];
 
