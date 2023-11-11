@@ -10,112 +10,110 @@
 </head>
 
 <body>
-
-    <div class="header container text-center">
-        <div class="row">
-            <div class="col-12 justify-content-center">
-                <h1>GENERAR REPORTE</h1>
+    <header>
+        <div class="header container-fluid text-center">
+            <div class="row">
+                <div class="col-12 justify-content-center">
+                    <h1>GENERAR REPORTE</h1>
+                </div>
             </div>
         </div>
-    </div>
+    </header>
 
     <div class="contenedor container-fluid text-center">
         <div class="d-flex justify-content-center align-items-center">
-            <div class="col-md-8">
-                <div class="card">
-                    <div class="card-body">
-                        <!-- Formulario -->
-                        <form class="formulario">
-                            <div class="container">
-                                <div class="row form-group">
+            <div class="col-8">
+                <!-- Formulario -->
+                <form class="formulario">
+                    <div class="container">
+                        <div class="row form-group">
+                            <div class="col-4">
+                                <label class="titulo" for="FormControlSelect">Selecciona una opción: </label>
+                                <select class="form-control" id="FormControlSelect" onchange="showDiv('hidden-div', this)">
+                                    <option value="0">Coche</option>
+                                    <option value="1">Persona</option>
+                                </select>
+                            </div>
+
+                            <!-- Coche -->
+
+                            <!-- Persona -->
+                            <div id="hidden-div">
+                                <label>Descripción General</label>
+                                <div class="descripcion form-group">
+                                    <textarea name="" id="textarea" class="cuadro col-12"></textarea>
+                                </div>
+                                <div class="row">
                                     <div class="col-6">
-                                        <label class="titulo" for="FormControlSelect">Selecciona una opción: </label>
-                                        <select class="form-control" id="FormControlSelect" onchange="showDiv('hidden-div', this)">
-                                            <option value="0">Coche</option>
-                                            <option value="1">Persona</option>
+                                        <label for="FormControlSelect">Color de Piel</label>
+                                        <select class="form-control">
+                                            <option>...</option>
+                                            <option value="0">Blanco</option>
+                                            <option value="1">Negro</option>
                                         </select>
-                                        <small id="skinHelp" class="form-text text-muted">Hola</small>
                                     </div>
-
-                                    <!-- Coche -->
-
-                                    <!-- Persona -->
-                                    <div id="hidden-div">
-                                        <label>Descripción General</label>
-                                        <div class="form-group">
-                                            <textarea name="" id="textarea" class="cuadro col-12"></textarea>
-                                        </div>
-                                        <div class="row">
-                                            <div class="col-6">
-                                                <label for="FormControlSelect">Color de Piel</label>
-                                                <select class="form-control">
-                                                    <option>...</option>
-                                                    <option value="0">Blanco</option>
-                                                    <option value="1">Negro</option>
-                                                </select>
-                                            </div>
-                                            <div class="col-6">
-                                                <label>Color de Playera</label>
-                                                <select class="form-control">
-                                                    <option>...</option>
-                                                    <option value="0">Rojo</option>
-                                                    <option value="1">Azul</option>
-                                                    <option value="2">Amarillo</option>
-                                                    <option value="3">Verde</option>
-                                                    <option value="4">Naranja</option>
-                                                    <option value="5">Morado</option>
-                                                    <option value="6">Rosado</option>
-                                                    <option value="7">Blanco</option>
-                                                    <option value="8">Negro</option>
-                                                    <option value="9">Gris</option>
-                                                </select>
-                                            </div>
-                                        </div>
-                                        <div class="row">
-                                            <div class="col-6">
-                                                <label>Largo de Manga</label>
-                                                <select class="form-control">
-                                                    <option>...</option>
-                                                    <option value="0">Inexistente</option>
-                                                    <option value="1">Corto</option>
-                                                    <option value="2">Largo</option>
-                                                </select>
-                                            </div>
-                                            <div class="col-6">
-                                                <label>Color de Pantalón</label>
-                                                <select class="form-control">
-                                                    <option>...</option>
-                                                    <option value="0">Rojo</option>
-                                                    <option value="1">Azul</option>
-                                                    <option value="2">Amarillo</option>
-                                                    <option value="3">Verde</option>
-                                                    <option value="4">Naranja</option>
-                                                    <option value="5">Morado</option>
-                                                    <option value="6">Rosado</option>
-                                                    <option value="7">Blanco</option>
-                                                    <option value="8">Negro</option>
-                                                    <option value="9">Gris</option>
-                                                </select>
-                                            </div>
-                                        </div>
-                                        <div class="row">
-                                            <div class="col-6">
-                                                <label>Largo de Pantalón</label>
-                                                <select class="form-control">
-                                                    <option>...</option>
-                                                    <option value="0">Corto</option>
-                                                    <option value="1">Largo</option>
-                                                </select>
-                                            </div>
-                                        </div>
-                                        <br>
-                                        <button type="submit" class="btn btn-primary">Enviar</button>
+                                    <div class="col-6">
+                                        <label>Color de Playera</label>
+                                        <select class="form-control">
+                                            <option>...</option>
+                                            <option value="0">Rojo</option>
+                                            <option value="1">Azul</option>
+                                            <option value="2">Amarillo</option>
+                                            <option value="3">Verde</option>
+                                            <option value="4">Naranja</option>
+                                            <option value="5">Morado</option>
+                                            <option value="6">Rosado</option>
+                                            <option value="7">Blanco</option>
+                                            <option value="8">Negro</option>
+                                            <option value="9">Gris</option>
+                                        </select>
                                     </div>
                                 </div>
+                                <br>
+                                <div class="row">
+                                    <div class="col-6">
+                                        <label>Largo de Manga</label>
+                                        <select class="form-control">
+                                            <option>...</option>
+                                            <option value="0">Inexistente</option>
+                                            <option value="1">Corto</option>
+                                            <option value="2">Largo</option>
+                                        </select>
+                                    </div>
+                                    <div class="col-6">
+                                        <label>Color de Pantalón</label>
+                                        <select class="form-control">
+                                            <option>...</option>
+                                            <option value="0">Rojo</option>
+                                            <option value="1">Azul</option>
+                                            <option value="2">Amarillo</option>
+                                            <option value="3">Verde</option>
+                                            <option value="4">Naranja</option>
+                                            <option value="5">Morado</option>
+                                            <option value="6">Rosado</option>
+                                            <option value="7">Blanco</option>
+                                            <option value="8">Negro</option>
+                                            <option value="9">Gris</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <br>
+                                <div class="row">
+                                    <div class="col-6">
+                                        <label>Largo de Pantalón</label>
+                                        <select class="form-control">
+                                            <option>...</option>
+                                            <option value="0">Corto</option>
+                                            <option value="1">Largo</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <br>
+                                <button type="submit" class="btn btn-secondary">Enviar</button>
                             </div>
-                        </form>
+                        </div>
                     </div>
-                </div>
+                </form>
             </div>
         </div>
     </div>
