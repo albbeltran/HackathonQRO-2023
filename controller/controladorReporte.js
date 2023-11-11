@@ -4,7 +4,7 @@ async function crearReporte(req, res) {
     let reporte = new Reporte(req.body);
     try {
         await reporte.crearReporte();
-        res.json("Reporte agregado!");
+        res.json("Reporte agregado a la BD.");
     } catch (error) {
         res.json(error);
     }

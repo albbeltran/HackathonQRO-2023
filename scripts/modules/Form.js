@@ -152,8 +152,8 @@ export default class Form {
           * 1: Carro
           * 2: Tráiler
       
-          Si la descripción está vacía, asigna null a todas las palabras clave.
-          Si una palabra clave no es explícita en la descripción, asigna null.
+          Si la descripción no contiene nada, está vacía, asigna NULL a todas las palabras clave.
+          Si una palabra clave no se declara de forma explícita en la descripción, asígnale null.
         `
 
         this.getPalabrasCoche(mensaje);
@@ -277,7 +277,7 @@ export default class Form {
 
         console.log("DATA A SUBIR: ", data);
 
-        await fetch('http://127.0.0.1:3002/reporte', {
+        const resultado = await fetch('http://127.0.0.1:3002/reporte', {
             method: 'POST',
             headers: {
                 'Accept': 'application/json',
@@ -285,6 +285,9 @@ export default class Form {
             },
             body: JSON.stringify(data)
         })
+
+        const json = await resultado.json()
+        alert(json);
 
         this.form.reset();
     }

@@ -8,7 +8,7 @@ let Reporte = class {
 
 Reporte.prototype.crearReporte = function () {
     let schema = '';
-    
+
     return new Promise(async (resolve, reject) => {
         if (this.data.bd === 'persona') schema = 'reportes_personas';
         else if (this.data.bd === 'coche') schema = 'reportes_coches';
@@ -20,10 +20,9 @@ Reporte.prototype.crearReporte = function () {
             .from(schema)
             .insert(this.data)
 
-        console.log(resultado);
-
         if (resultado.error) {
-            reject("ERROR EN CONSULTA: ", resultado.error);
+            if (resultado.error.code === "23502") reject("Error en BD, algunos datos no deberían ser nulos.");
+            reject("Error en la consulta: ", resultado.error);
         } else resolve();
     })
 }
