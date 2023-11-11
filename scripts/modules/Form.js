@@ -3,24 +3,69 @@ import { executeMessage } from './openai.js';
 export default class Form {
     constructor() {
         this.form = document.querySelector('#form-reporte');
+        this.submitBtn = document.querySelector('#btn-submit');
+        this.submitBtn.setAttribute('disabled', 'true');
         this.btnKeywords = document.querySelector('#btn-keywords');
         this.tipoReporte = document.querySelector('#FormControlSelect');
         this.descripcion = document.querySelector('#descripcion');
         this.keywordsPersona = document.querySelector('#keywords-persona');
+        this.keywordsCoche = document.querySelector('#keywords-coche');
         this.events();
     }
 
     events() {
         this.form.addEventListener('submit', e => {
             e.preventDefault();
-        });
+            this.formSubmitHandler();
+        })
 
         this.btnKeywords.addEventListener('click', () => {
-            this.formSubmitHandler();
+            this.keywordsHandler();
         })
     }
 
     formSubmitHandler() {
+        let data = {};
+
+        if (this.tipoReporte.value === 'persona') {
+            let colorPiel = document.querySelector('#colorPiel').value;
+            let colorPlayera = document.querySelector('#colorPlayera').value;
+            let largoMangas = document.querySelector('#largoMangas').value;
+            let colorPantalon = document.querySelector('#colorPantalon').value;
+            let largoPantalon = document.querySelector('#largoPantalon').value;
+
+            if(!this.isHex(colorPiel)) colorPiel = this.colorAHex(colorPiel);
+            if(!this.isHex(colorPlayera)) colorPlayera = this.colorAHex(colorPlayera);
+            if(!this.isHex(colorPantalon)) colorPantalon = this.colorAHex(colorPantalon);
+
+            data = {
+                color_piel: colorPiel ? colorPiel : null,
+                color_playera: colorPlayera ? colorPlayera : null,
+                largo_mangas: largoMangas ? largoMangas : null,
+                color_pantalon: colorPantalon ? colorPantalon : null,
+                largo_pantalon: largoPantalon ? largoPantalon : null
+            }
+        }
+
+        else if (this.tipoReporte.value === 'coche') {
+            let colorVehiculo = document.querySelector('#colorVehiculo').value;
+            let tipoVehiculo = document.querySelector('#tipoVehiculo').value;
+
+            if(!this.isHex(colorVehiculo)) colorVehiculo = this.colorAHex(colorVehiculo);
+
+            data = {
+                color_vehiculo: colorVehiculo ? colorVehiculo : null,
+                tipo_vehiculo: tipoVehiculo ? tipoVehiculo : null
+            }
+        }
+
+        this.subirReporte(data);
+        document.querySelector('#keywords-persona').style.display = 'none';
+        document.querySelector('#keywords-coche').style.display = 'none';
+        this.submitBtn.setAttribute('disabled', 'true');
+    }
+
+    keywordsHandler() {
         if (this.tipoReporte.value === 'persona') this.personaStrategy();
         else if (this.tipoReporte.value === 'coche') this.cocheStrategy();
     }
@@ -86,7 +131,20 @@ export default class Form {
       
           ${this.descripcion.value}
       
-          El color deberá devolverse con un HEX.
+          El color deberá devolverse con un HEX en mayúsculas.
+
+          Únicamente utiliza los siguientes colores:
+
+          #FFFFFF: BLANCO
+          #000000: NEGRO
+          #0000FF: AZUL
+          #FF0000: ROJO
+          #008000: VERDE
+          #FFA500: NARANJA
+          #FFFF00: AMARILLO
+          #FFC0CB: ROSA
+          #800080: MORADO
+          #A0522D: CAFE
       
           Los tipos deberán devolverse como int con los siguientes códigos:
       
@@ -98,7 +156,7 @@ export default class Form {
           Si una palabra clave no es explícita en la descripción, asigna null.
         `
 
-        this.extraerPalabrasClave(mensaje);
+        this.getPalabrasCoche(mensaje);
     }
 
     async extraerPalabrasClave(mensaje) {
@@ -109,6 +167,11 @@ export default class Form {
     async getPalabrasPersona(mensaje) {
         const data = await this.extraerPalabrasClave(mensaje);
         this.renderPalabrasPersona(data);
+    }
+
+    async getPalabrasCoche(mensaje) {
+        const data = await this.extraerPalabrasClave(mensaje);
+        this.renderPalabrasCoche(data);
     }
 
     renderPalabrasPersona(data) {
@@ -131,41 +194,40 @@ export default class Form {
             colorPlayeraNombre = this.hexANombre(data.color_playera);
             colorPlayera.value = colorPlayeraNombre;
         } else colorPiel.value = data.color_playera;
-        
+
         if (data.color_pantalon) {
             colorPantalonNombre = this.hexANombre(data.color_pantalon);
             colorPantalon.value = colorPantalonNombre;
         } else colorPantalon.value = data.color_pantalon;
-        
+
         largoMangas.value = data.largo_mangas;
         largoPantalon.value = data.largo_pantalon;
 
-        console.log(colorPiel.value, colorPlayera.value, largoMangas.value, colorPantalon.value, largoPantalon.value);
+        this.submitBtn.removeAttribute('disabled');
     }
 
-    async subirReporte(data) {
-        console.log("DATA A SUBIR: ", data);
+    renderPalabrasCoche(data) {
+        this.keywordsCoche.style.display = 'block';
 
-        console.log(this.tipoReporte.value)
+        let colorVehiculo = document.querySelector('#colorVehiculo');
+        let tipoVehiculo = document.querySelector('#tipoVehiculo');
 
-        data.bd = this.tipoReporte.value;
+        let colorVehiculoNombre;
 
-        await fetch('http://127.0.0.1:3002/reporte', {
-            method: 'POST',
-            headers: {
-                'Accept': 'application/json',
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify(data)
-        })
+        if (data.color_vehiculo) {
+            colorVehiculoNombre = this.hexANombre(data.color_vehiculo);
+            colorVehiculo.value = colorVehiculoNombre;
+        } else colorVehiculo.value = data.color_vehiculo;
 
-        this.form.reset();
+        tipoVehiculo.value = data.tipo_vehiculo;
+
+        this.submitBtn.removeAttribute('disabled');
     }
 
     hexANombre(hex) {
-        if (!/^#[0-9a-fA-F]{6}$/.test(hex)) return null;
+        if(!this.isHex(hex)) return null;
 
-        const colors = {
+        const colores = {
             "#FFFFFF": "BLANCO",
             "#000000": "NEGRO",
             "#0000FF": "AZUL",
@@ -178,10 +240,52 @@ export default class Form {
             "#A0522D": "CAFE"
         };
 
-        console.log('COLOR HEX: ', colors[hex])
-
-        if (colors[hex]) return colors[hex];
+        if (colores[hex]) return colores[hex];
 
         return null;
+    }
+
+
+    colorAHex(color) {
+        color = color.toUpperCase();
+
+        const colores = {
+            "BLANCO": "#FFFFFF",
+            "NEGRO": "#000000",
+            "AZUL": "#0000FF",
+            "ROJO": "#FF0000",
+            "VERDE": "#008000",
+            "NARANJA": "#FFA500",
+            "AMARILLO": "#FFFF00",
+            "ROSA": "#FFC0CB",
+            "MORADO": "#800080",
+            "CAFE": "#A0522D",
+        };
+
+        if (colores[color]) return colores[color];
+
+        return null;
+    }
+
+    isHex(color) {
+        if (/^#[0-9a-fA-F]{6}$/.test(color)) return true;
+        return false;
+    }
+
+    async subirReporte(data) {        
+        data.bd = this.tipoReporte.value;
+
+        console.log("DATA A SUBIR: ", data);
+
+        await fetch('http://127.0.0.1:3002/reporte', {
+            method: 'POST',
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(data)
+        })
+
+        this.form.reset();
     }
 }
