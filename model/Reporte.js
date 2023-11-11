@@ -6,21 +6,24 @@ let Reporte = class {
     }
 }
 
-Reporte.prototype.crearReporte = function () {    
+Reporte.prototype.crearReporte = function () {
     return new Promise(async (resolve, reject) => {
-        console.log(this.data)
-        const { error } = await supabase
-            .from('reportes_personas')
-            .insert({
-                id: this.data.id,
-                color_piel: this.data.color_piel,
-                color_playera: this.data.color_playera,
-                largo_mangas: this.data.largo_mangas,
-                color_pantalon: this.data.color_pantalon,
-                largo_pantalon: this.data.largo_pantalon
-            })
-        if (error) {
-            reject(error);
+        console.log('DATA RECIBIDA: ', this.data);
+
+        let schema = '';
+        if (this.data.bd === 'persona') schema = 'reportes_personas';
+        else if (this.data.bd === 'coche') schema = 'reportes_coches';
+
+        delete this.data.bd;
+
+        const resultado = await supabase
+            .from(schema)
+            .insert(this.data)
+
+        console.log(resultado);
+
+        if (resultado.error) {
+            reject("ERROR EN CONSULTA: ", resultado.error);
         } else resolve();
     })
 }
