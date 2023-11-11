@@ -8,15 +8,17 @@ const openai = new OpenAI({
     dangerouslyAllowBrowser: true
 })
 
-export async function executeMessage(palabras_clave, descripcion) {
+export async function executeMessage(mensaje) {
     const completion = await openai.chat.completions.create({
         messages: [
-            { "role": "user", "content": "Say Hello World." },
-            { "role": "user", "content": `Devuelve un json con las siguientes palabras clave ${palabras_clave} extraídas de la siguiente descripción ${descripcion}` },
+            { "role": "user", "content": mensaje },
         ],
-        model: "gpt-3.5-turbo",
+        model: "gpt-3.5-turbo-1106",
         response_format: { "type": "json_object" }
     });
 
-    console.log(completion.choices[0]);
+    const resultado = JSON.parse(completion.choices[0].message.content);
+    console.log(resultado);
+
+    return resultado;
 }

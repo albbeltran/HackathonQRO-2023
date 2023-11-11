@@ -32,52 +32,26 @@
                                     <textarea name="" id="descripcion" class="cuadro col-12"></textarea>
                             </div>
 
-                            <!-- Coche -->
-                            <div class="row">
-                                <div class="col-6">
-                                    <label for="ColorVehiculo">Color del Vehiculo</label>
-                                    <select class="form-control" id="ColorPiel">
-                                        <option>...</option>
-                                        <option value="0">Blanco</option>
-                                        <option value="1">Negro</option>
-                                    </select>
-                                </div>
-                                <div class="col-6">
-                                    <label for="ColorPlayera">Color de Playera</label>
-                                    <select class="form-control" id="ColorPlayera">
-                                        <option>...</option>
-                                        <option value="0">Rojo</option>
-                                        <option value="1">Azul</option>
-                                        <option value="2">Amarillo</option>
-                                        <option value="3">Verde</option>
-                                        <option value="4">Naranja</option>
-                                        <option value="5">Morado</option>
-                                        <option value="6">Rosado</option>
-                                        <option value="7">Blanco</option>
-                                        <option value="8">Negro</option>
-                                        <option value="9">Gris</option>
-                                    </select>
-                                </div>
-                            </div>
-                            <br>
                             <!-- Persona -->
-                            <div id="hidden-div">
+                            <div id="keywords-persona" style="display: none;">
                                 <!-- <label>Descripción General</label>
                                 <div class="descripcion form-group">
                                     <textarea name="" id="descripcionPersona" class="cuadro col-12"></textarea>
                                 </div> -->
                                 <div class="row">
                                     <div class="col-6">
-                                        <label for="ColorPiel">Color de Piel</label>
-                                        <select class="form-control" id="ColorPiel">
+                                        <label for="colorPiel">Color de Piel</label>
+                                        <!-- <select class="form-control" id="colorPiel">
                                             <option>...</option>
                                             <option value="0">Blanco</option>
                                             <option value="1">Negro</option>
-                                        </select>
+                                        </select> -->
+
+                                        <input type="text" name="" id="colorPiel">
                                     </div>
                                     <div class="col-6">
-                                        <label for="ColorPlayera">Color de Playera</label>
-                                        <select class="form-control" id="ColorPlayera">
+                                        <label for="colorPlayera">Color de Playera</label>
+                                        <!-- <select class="form-control" id="colorPlayera">
                                             <option>...</option>
                                             <option value="0">Rojo</option>
                                             <option value="1">Azul</option>
@@ -89,23 +63,27 @@
                                             <option value="7">Blanco</option>
                                             <option value="8">Negro</option>
                                             <option value="9">Gris</option>
-                                        </select>
+                                        </select> -->
+
+                                        <input type="text" name="" id="colorPlayera">
                                     </div>
                                 </div>
                                 <br>
                                 <div class="row">
                                     <div class="col-6">
-                                        <label for="LargoManga">Largo de Manga</label>
-                                        <select class="form-control" id="LargoManga">
+                                        <label for="largoManga">Largo de Manga</label>
+                                        <select class="form-control" id="largoMangas">
                                             <option>...</option>
                                             <option value="0">Inexistente</option>
                                             <option value="1">Corto</option>
                                             <option value="2">Largo</option>
                                         </select>
+
+                                        <!-- <input type="text" name="" id="largoMangas"> -->
                                     </div>
                                     <div class="col-6">
-                                        <label for="ColorPantalon">Color de Pantalón</label>
-                                        <select class="form-control" id="ColorPantalon">
+                                        <label for="colorPantalon">Color de Pantalón</label>
+                                        <!-- <select class="form-control" id="colorPantalon">
                                             <option>...</option>
                                             <option value="0">Rojo</option>
                                             <option value="1">Azul</option>
@@ -117,23 +95,29 @@
                                             <option value="7">Blanco</option>
                                             <option value="8">Negro</option>
                                             <option value="9">Gris</option>
-                                        </select>
+                                        </select> -->
+
+                                        <input type="text" name="" id="colorPantalon">
                                     </div>
                                 </div>
                                 <br>
                                 <div class="row">
                                     <div class="col-6">
-                                        <label for="LargoPantalon">Largo de Pantalón</label>
-                                        <select class="form-control" id="LargoPantalon">
+                                        <label for="largoPantalon">Largo de Pantalón</label>
+                                        <select class="form-control" id="largoPantalon">
                                             <option>...</option>
                                             <option value="0">Corto</option>
                                             <option value="1">Largo</option>
                                         </select>
+
+                                        <!-- <input type="text" name="" id="largoPantalon"> -->
                                     </div>
                                 </div>
                                 <br>
-                                <button type="submit" class="btn btn-primary">Enviar</button>
                             </div>
+
+                            <button type="button" class="btn btn-warning" id="btn-keywords">Extraer información</button>
+                            <button type="submit" class="btn btn-secondary">Enviar</button>
                         </div>
                     </div>
                 </form>
@@ -145,7 +129,7 @@
     <script src="main-bundled.js"></script>
     <script>
         function showDiv(divId, element) {
-            document.getElementById(divId).style.display = element.value == 'coche' ? 'none' : 'block';
+            // document.getElementById(divId).style.display = element.value == 'coche' ? 'none' : 'block';
         }
     </script>
 </body>
