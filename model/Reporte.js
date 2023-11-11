@@ -7,14 +7,14 @@ let Reporte = class {
 }
 
 Reporte.prototype.crearReporte = function () {
+    let schema = '';
+    
     return new Promise(async (resolve, reject) => {
-        console.log('DATA RECIBIDA: ', this.data);
-
-        let schema = '';
         if (this.data.bd === 'persona') schema = 'reportes_personas';
         else if (this.data.bd === 'coche') schema = 'reportes_coches';
 
         delete this.data.bd;
+        console.log('\nDATA A SUBIR: ', this.data);
 
         const resultado = await supabase
             .from(schema)

@@ -3,6 +3,8 @@ import { executeMessage } from './openai.js';
 export default class Form {
     constructor() {
         this.form = document.querySelector('#form-reporte');
+        this.submitBtn = document.querySelector('#btn-submit');
+        this.submitBtn.setAttribute('disabled', 'true');
         this.btnKeywords = document.querySelector('#btn-keywords');
         this.tipoReporte = document.querySelector('#FormControlSelect');
         this.descripcion = document.querySelector('#descripcion');
@@ -14,14 +16,58 @@ export default class Form {
     events() {
         this.form.addEventListener('submit', e => {
             e.preventDefault();
+            this.formSubmitHandler();
+
         });
 
         this.btnKeywords.addEventListener('click', () => {
-            this.formSubmitHandler();
+            this.keywordsHandler();
         })
     }
 
     formSubmitHandler() {
+        let data = {};
+
+        console.log('SUBMIT');
+
+        if (this.tipoReporte.value === 'persona') {
+            let colorPiel = document.querySelector('#colorPiel').value;
+            let colorPlayera = document.querySelector('#colorPlayera').value;
+            let largoMangas = document.querySelector('#largoMangas').value;
+            let colorPantalon = document.querySelector('#colorPantalon').value;
+            let largoPantalon = document.querySelector('#largoPantalon').value;
+
+            if(this.isHex(colorPiel)) colorPiel = this.colorAHex(colorPiel);
+            if(this.isHex(colorPlayera)) colorPlayera = this.colorAHex(colorPlayera);
+            if(this.isHex(colorPantalon)) colorPantalon = this.colorAHex(colorPantalon);
+
+            data = {
+                color_piel: colorPiel ? colorPiel : null,
+                color_playera: colorPlayera ? colorPlayera : null,
+                largo_mangas: largoMangas ? largoMangas : null,
+                color_pantalon: colorPantalon ? colorPantalon : null,
+                largo_pantalon: largoPantalon ? largoPantalon : null
+            }
+        }
+
+        else if (this.tipoReporte.value === 'coche') {
+            let colorVehiculo = document.querySelector('#colorVehiculo').value;
+            let tipoVehiculo = document.querySelector('#tipoVehiculo').value;
+
+            if(this.isHex(colorVehiculo)) colorVehiculo = this.colorAHex(colorVehiculo);
+
+            data = {
+                color_vehiculo: colorVehiculo ? colorVehiculo : null,
+                tipo_vehiculo: tipoVehiculo ? tipoVehiculo : null
+            }
+        }
+
+        this.subirReporte(data);
+        document.querySelector('#keywords-persona').style.display = 'none';
+        document.querySelector('#keywords-coche').style.display = 'none';
+    }
+
+    keywordsHandler() {
         if (this.tipoReporte.value === 'persona') this.personaStrategy();
         else if (this.tipoReporte.value === 'coche') this.cocheStrategy();
     }
@@ -160,6 +206,8 @@ export default class Form {
         largoPantalon.value = data.largo_pantalon;
 
         console.log(colorPiel.value, colorPlayera.value, largoMangas.value, colorPantalon.value, largoPantalon.value);
+
+        this.submitBtn.removeAttribute('disabled');
     }
 
     renderPalabrasCoche(data) {
@@ -178,6 +226,58 @@ export default class Form {
         tipoVehiculo.value = data.tipo_vehiculo;
 
         console.log(colorVehiculo.value, tipoVehiculo.value);
+
+        this.submitBtn.removeAttribute('disabled');
+    }
+
+    hexANombre(hex) {
+        if(!this.isHex(hex)) return null;
+
+        const colores = {
+            "#FFFFFF": "BLANCO",
+            "#000000": "NEGRO",
+            "#0000FF": "AZUL",
+            "#FF0000": "ROJO",
+            "#008000": "VERDE",
+            "#FFA500": "NARANJA",
+            "#FFFF00": "AMARILLO",
+            "#FFC0CB": "ROSA",
+            "#800080": "MORADO",
+            "#A0522D": "CAFE"
+        };
+
+        if (colores[hex]) return colores[hex];
+
+        return null;
+    }
+
+
+    colorAHex(color) {
+        color = color.toUpperCase();
+        console.log('COLOR A CONVERTIR: ', color);
+
+        const colores = {
+            "BLANCO": "#FFFFFF",
+            "NEGRO": "#000000",
+            "AZUL": "#0000FF",
+            "ROJO": "#FF0000",
+            "VERDE": "#008000",
+            "NARANJA": "#FFA500",
+            "AMARILLO": "#FFFF00",
+            "ROSA": "#FFC0CB",
+            "MORADO": "#800080",
+            "CAFE": "#A0522D",
+        };
+
+        if (colores[color]) return colores[color];
+
+        return null;
+    }
+
+    isHex(color) {
+        console.log('HEX A CONFIRMAR', color);
+        if (/^#[0-9a-fA-F]{6}$/.test(color)) return true;
+        return false;
     }
 
     async subirReporte(data) {
@@ -197,26 +297,5 @@ export default class Form {
         })
 
         this.form.reset();
-    }
-
-    hexANombre(hex) {
-        if (!/^#[0-9a-fA-F]{6}$/.test(hex)) return null;
-
-        const colors = {
-            "#FFFFFF": "BLANCO",
-            "#000000": "NEGRO",
-            "#0000FF": "AZUL",
-            "#FF0000": "ROJO",
-            "#008000": "VERDE",
-            "#FFA500": "NARANJA",
-            "#FFFF00": "AMARILLO",
-            "#FFC0CB": "ROSA",
-            "#800080": "MORADO",
-            "#A0522D": "CAFE"
-        };
-
-        if (colors[hex]) return colors[hex];
-
-        return null;
     }
 }
