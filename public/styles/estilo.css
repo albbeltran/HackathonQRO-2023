@@ -1,0 +1,35 @@
+:root {
+    --texto: rgba(255, 255, 255, 0.7);
+    --blanco: #fff;
+    --input: #3A3B3C;
+    --input-hover: #4b4d4e;
+    --activo: #3282B8;
+    --gris-claro: #B0B3B8;
+    --fondo-contenido: #1B262C;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background-image: url(../img/sirenas.jpg);
+    color: var(--blanco);
+}
+
+.header {
+    margin-top: 40px;
+    height: 100px;
+}
+
+.formulario {
+    padding: 40px;
+    background: var(--fondo-contenido);
+    color: var(--blanco);
+}
+
+#hidden-div {
+    display: none;
+}
