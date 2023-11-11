@@ -3,16 +3,21 @@ import { executeMessage } from './openai.js';
 export default class Form {
     constructor() {
         this.form = document.querySelector('#form-reporte');
+        this.btnKeywords = document.querySelector('#btn-keywords');
         this.tipoReporte = document.querySelector('#FormControlSelect');
         this.descripcion = document.querySelector('#descripcion');
+        this.keywordsPersona = document.querySelector('#keywords-persona');
         this.events();
     }
 
     events() {
         this.form.addEventListener('submit', e => {
             e.preventDefault();
-            this.formSubmitHandler();
         });
+
+        this.btnKeywords.addEventListener('click', () => {
+            this.formSubmitHandler();
+        })
     }
 
     formSubmitHandler() {
@@ -38,8 +43,21 @@ export default class Form {
       
           ${this.descripcion.value}
       
-          Todos los colores deberán devolverse con un HEX.
-      
+          Todos los colores deberán devolverse con un HEX en mayúscula.
+
+          Únicamente utiliza los siguientes colores:
+
+          #FFFFFF: BLANCO
+          #000000: NEGRO
+          #0000FF: AZUL
+          #FF0000: ROJO
+          #008000: VERDE
+          #FFA500: NARANJA
+          #FFFF00: AMARILLO
+          #FFC0CB: ROSA
+          #800080: MORADO
+          #A0522D: CAFE
+
           Los tamaños deberán devolverse como int con los siguientes códigos:
       
           * 0: Sin mangas
@@ -50,7 +68,7 @@ export default class Form {
           Si una palabra clave no es explícita en la descripción, asigna null.
         `
 
-        this.extraerPalabrasClave(mensaje);
+        this.getPalabrasPersona(mensaje);
     }
 
     cocheStrategy() {
@@ -85,7 +103,44 @@ export default class Form {
 
     async extraerPalabrasClave(mensaje) {
         const data = await executeMessage(mensaje);
-        this.subirReporte(data);
+        return data;
+    }
+
+    async getPalabrasPersona(mensaje) {
+        const data = await this.extraerPalabrasClave(mensaje);
+        this.renderPalabrasPersona(data);
+    }
+
+    renderPalabrasPersona(data) {
+        this.keywordsPersona.style.display = 'block';
+
+        let colorPiel = document.querySelector('#colorPiel');
+        let colorPlayera = document.querySelector('#colorPlayera');
+        let largoMangas = document.querySelector('#largoMangas');
+        let colorPantalon = document.querySelector('#colorPantalon');
+        let largoPantalon = document.querySelector('#largoPantalon');
+
+        let colorPielNombre, colorPlayeraNombre, colorPantalonNombre;
+
+        if (data.color_piel) {
+            colorPielNombre = this.hexANombre(data.color_piel);
+            colorPiel.value = colorPielNombre;
+        } else colorPiel.value = data.color_piel;
+
+        if (data.color_playera) {
+            colorPlayeraNombre = this.hexANombre(data.color_playera);
+            colorPlayera.value = colorPlayeraNombre;
+        } else colorPiel.value = data.color_playera;
+        
+        if (data.color_pantalon) {
+            colorPantalonNombre = this.hexANombre(data.color_pantalon);
+            colorPantalon.value = colorPantalonNombre;
+        } else colorPantalon.value = data.color_pantalon;
+        
+        largoMangas.value = data.largo_mangas;
+        largoPantalon.value = data.largo_pantalon;
+
+        console.log(colorPiel.value, colorPlayera.value, largoMangas.value, colorPantalon.value, largoPantalon.value);
     }
 
     async subirReporte(data) {
@@ -105,5 +160,28 @@ export default class Form {
         })
 
         this.form.reset();
+    }
+
+    hexANombre(hex) {
+        if (!/^#[0-9a-fA-F]{6}$/.test(hex)) return null;
+
+        const colors = {
+            "#FFFFFF": "BLANCO",
+            "#000000": "NEGRO",
+            "#0000FF": "AZUL",
+            "#FF0000": "ROJO",
+            "#008000": "VERDE",
+            "#FFA500": "NARANJA",
+            "#FFFF00": "AMARILLO",
+            "#FFC0CB": "ROSA",
+            "#800080": "MORADO",
+            "#A0522D": "CAFE"
+        };
+
+        console.log('COLOR HEX: ', colors[hex])
+
+        if (colors[hex]) return colors[hex];
+
+        return null;
     }
 }
