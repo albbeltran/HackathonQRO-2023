@@ -12,9 +12,8 @@ export default class Form {
     events() {
         this.form.addEventListener('submit', e => {
             e.preventDefault();
+            console.log('SUBMIT');
             this.formSubmitHandler();
-
-            this.subirReporte();
 
             this.form.reset();
         });
@@ -22,37 +21,29 @@ export default class Form {
 
     formSubmitHandler() {
         if (this.tipoReporte.value === 'persona') {
-            this.descripcion = document.querySelector('#DescripcionPersona').value;
-            console.log(this.descripcion);
+            this.descripcion = document.querySelector('#descripcionPersona').value;
             this.personaStrategy();
         }
     }
 
     personaStrategy() {
         this.palabras_clave = [
-            "id",
             "color_piel",
             "color_playera",
-            "largo_manga",
+            "largo_mangas",
             "color_pantalon",
             "largo_pantalon"
         ]
+
+        this.extraerPalabrasClave();
     }
 
-    extraerPalabrasClave() {
-        this.data = executeMessage(this.palabras_clave, this.descripcion);
+    async extraerPalabrasClave() {
+        this.data = await executeMessage(this.palabras_clave, this.descripcion);
+        this.subirReporte();
     }
 
     async subirReporte() {
-        // test data
-        this.data = {
-            "color_piel": "FFFFFF",
-            "color_playera": "FFF000",
-            "largo_mangas": null, 
-            "color_pantalon": "FFF000",
-            "largo_pantalon": null 
-        }
-
         console.log(this.data)
 
         await fetch('http://127.0.0.1:3002/reporte', {
