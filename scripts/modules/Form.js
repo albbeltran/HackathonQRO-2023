@@ -1,10 +1,10 @@
-import { executeMessage } from './openai';
+import { executeMessage } from './openai.js';
 
 export default class Form {
     constructor() {
         this.form = document.querySelector('#add-form');
-        this.tipoReporte = document.querySelector('#').value;
-        this.descripcion = document.querySelector('#').value;
+        this.tipoReporte = document.querySelector('#FormControlSelect').value;
+        console.log(this.tipoReporte)
         this.palabras_clave = [];
         this.events();
     }
@@ -21,7 +21,11 @@ export default class Form {
     }
 
     formSubmitHandler() {
-        if (this.tipoReporte === 'persona') this.personaStrategy();
+        if (this.tipoReporte === 'persona') {
+            this.descripcion = document.querySelector('#DescripcionPersona').value;
+            console.log(this.descripcion);
+            this.personaStrategy();
+        }
     }
 
     personaStrategy() {
