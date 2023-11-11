@@ -4,10 +4,13 @@
   "description": "",
   "main": "app.js",
   "dependencies": {
+    "@supabase/functions-js": "^2.1.5",
+    "@supabase/supabase-js": "^2.38.4",
     "dotenv": "^16.3.1",
     "express": "^4.18.2",
     "nodemon": "^3.0.1",
-    "openai": "^4.17.4"
+    "openai": "^4.17.4",
+    "uuid": "^9.0.1"
   },
   "devDependencies": {},
   "scripts": {
