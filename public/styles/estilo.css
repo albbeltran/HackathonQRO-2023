@@ -21,6 +21,12 @@ body {
 aside {
 	background: var(--fondo-contenido);
 	height: 100vh;
+	display: flex;
+    flex-direction: column;
+}
+
+a {
+	color: var(--blanco);
 }
 
 main {
@@ -65,6 +71,16 @@ textarea:focus {
 .control:hover {
 	border-color: #A0E9FF;
 	color: var(--input);
+}
+
+.main-container{
+    padding: 0;
+}
+
+#bg-image{
+    height: 100vh;
+    width: 100%;
+    z-index: 1;
 }
 
 #hidden-div {
