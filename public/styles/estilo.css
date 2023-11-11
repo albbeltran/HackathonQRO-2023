@@ -16,20 +16,20 @@
 
 body {
     background-image: url(../img/sirenas.jpg);
-	color: var(--blanco);
+    color: var(--blanco);
 }
 
 .header {
-	margin-top: 40px;
-	height:100px;
+    margin-top: 40px;
+    height: 100px;
 }
 
 .formulario {
-	padding: 40px;
-	background: var(--fondo-contenido);
-	color: var(--blanco);
+    padding: 40px;
+    background: var(--fondo-contenido);
+    color: var(--blanco);
 }
 
 #hidden-div {
-	display: none;
+    display: none;
 }

@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Generar Reporte</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+    <link rel="stylesheet" href="styles/estilo.css">
+</head>
+
+<body>
+    <header class="fixed-top">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col">
+                    <h1>GENERAR REPORTE</h1>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!--Formulario-->
+    <form class="formulario" id="form-reporte">
+        <div class="container">
+            <div class="row form-group">
+                <div class="col-12">
+                    <label for="FormControlSelect">Selecciona una opción</label>
+                    <select class="form-control" id="FormControlSelect" onchange="showDiv('hidden-div', this)">
+                        <option value="coche">Coche</option>
+                        <option value="persona">Persona</option>
+                    </select>
+                    <small id="skinHelp" class="form-text text-muted">Hola</small>
+                </div>
+
+                <!--Coche-->
+
+                <!--Persona-->
+                <div id="hidden-div">
+                    <label>Descripción General</label>
+                    <div class="form-group">
+                        <textarea name="" id="textarea" class="cuadro col-12"></textarea>
+                    </div>
+                    <div class="col-6">
+                        <label for="FormControlSelect">Color de Piel</label>
+                        <select class="form-control">
+                            <option>...</option>
+                            <option value="0">Blanco</option>
+                            <option value="1">Negro</option>
+                        </select>
+                        <small id="skinHelp" class="form-text text-muted">Hola</small>
+                    </div>
+                    <div class="col-6">
+                        <label>Color de Playera</label>
+                        <select class="form-control">
+                            <option>...</option>
+                            <option value="0">Rojo</option>
+                            <option value="1">Azul</option>
+                            <option value="2">Amarillo</option>
+                            <option value="3">Verde</option>
+                            <option value="4">Naranja</option>
+                            <option value="5">Morado</option>
+                            <option value="6">Rosado</option>
+                            <option value="7">Blanco</option>
+                            <option value="8">Negro</option>
+                            <option value="9">Gris</option>
+                        </select>
+                        <small id="skinHelp" class="form-text text-muted">Hola</small>
+                    </div>
+                    <div class="col-6">
+                        <label>Largo de Manga</label>
+                        <select class="form-control">
+                            <option>...</option>
+                            <option value="0">Inexistente</option>
+                            <option value="1">Corto</option>
+                            <option value="2">Largo</option>
+                        </select>
+                        <small id="skinHelp" class="form-text text-muted">Hola</small>
+                    </div>
+                    <div class="col-6">
+                        <label>Color de Pantalón</label>
+                        <select class="form-control">
+                            <option>...</option>
+                            <option value="0">Rojo</option>
+                            <option value="1">Azul</option>
+                            <option value="2">Amarillo</option>
+                            <option value="3">Verde</option>
+                            <option value="4">Naranja</option>
+                            <option value="5">Morado</option>
+                            <option value="6">Rosado</option>
+                            <option value="7">Blanco</option>
+                            <option value="8">Negro</option>
+                            <option value="9">Gris</option>
+                        </select>
+                        <small id="skinHelp" class="form-text text-muted">Hola</small>
+                    </div>
+                    <div class="col-6">
+                        <label>Largo de Pantalón</label>
+                        <select class="form-control">
+                            <option>...</option>
+                            <option value="0">Corto</option>
+                            <option value="1">Largo</option>
+                        </select>
+                        <small id="skinHelp" class="form-text text-muted">Hola</small>
+                    </div>
+                    <button type="submit" class="btn btn-primary">Enviar</button>
+                </div>
+            </div>
+        </div>
+    </form>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
+        crossorigin="anonymous"></script>
+    <script src="main-bundled.js"></script>
+
+    <script>
+        function showDiv(divId, element) {
+            document.getElementById(divId).style.display = element.value == 'coche' ? 'none' : 'block';
+        }
+    </script>
+</body>
+
+</html>
