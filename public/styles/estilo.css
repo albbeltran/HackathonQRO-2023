@@ -5,7 +5,7 @@
 	--input-hover: #4b4d4e;
 	--activo: #2D88FF;
 	--gris-claro: #B0B3B8;
-	--fondo-contenido: #242526;
+	--fondo-contenido: #0F4C75;
 }
 
 * {
@@ -15,39 +15,56 @@
 }
 
 body {
-    background: #1B262C;
 	color: var(--blanco);
 }
 
-.formulario {
-	padding: 20px;
+aside {
 	background: var(--fondo-contenido);
-	color: var(--blanco);
-	border-radius: 50px;
+	height: 100vh;
+}
+
+main {
+	background: var(--blanco);
+	height: 100vh;
+	display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+/* FORMULARIO */
+.formulario {
+	background: var(--blanco);
+	color: var(--input);
 }
 
 .cuadro {
     height: 150px;
     resize: none;
-	background: var(--input);
-	color: var(--blanco);
+	border-color: var(--fondo-contenido);
+	color: var(--input);
 }
 
-.form-control {
-    font-size: 0.8rem;
-    padding: 0.1rem 0.2rem;
+.cuadro:hover {
+	border-color: #A0E9FF;
+}
+
+textarea:focus {
+	background-color: #E3F4F4;
+}
+
+.control {
+    font-size: 1rem;
+    padding: 0.2rem 0.4rem;
     height: 2rem;
-	background: var(--input);
-	color: var(--blanco);
+    width: 12rem;
+	color: var(--input);
+	border-color: var(--fondo-contenido);
 }
 
-.form-control:hover {
-	background: var(--input-hover);
-	color: var(--blanco);
-}
-
-.form-control :hover {
-	background: var(--input-hover);
+.control:hover {
+	border-color: #A0E9FF;
+	color: var(--input);
 }
 
 #hidden-div {
