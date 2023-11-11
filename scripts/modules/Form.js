@@ -17,8 +17,7 @@ export default class Form {
         this.form.addEventListener('submit', e => {
             e.preventDefault();
             this.formSubmitHandler();
-
-        });
+        })
 
         this.btnKeywords.addEventListener('click', () => {
             this.keywordsHandler();
@@ -28,8 +27,6 @@ export default class Form {
     formSubmitHandler() {
         let data = {};
 
-        console.log('SUBMIT');
-
         if (this.tipoReporte.value === 'persona') {
             let colorPiel = document.querySelector('#colorPiel').value;
             let colorPlayera = document.querySelector('#colorPlayera').value;
@@ -37,9 +34,9 @@ export default class Form {
             let colorPantalon = document.querySelector('#colorPantalon').value;
             let largoPantalon = document.querySelector('#largoPantalon').value;
 
-            if(this.isHex(colorPiel)) colorPiel = this.colorAHex(colorPiel);
-            if(this.isHex(colorPlayera)) colorPlayera = this.colorAHex(colorPlayera);
-            if(this.isHex(colorPantalon)) colorPantalon = this.colorAHex(colorPantalon);
+            if(!this.isHex(colorPiel)) colorPiel = this.colorAHex(colorPiel);
+            if(!this.isHex(colorPlayera)) colorPlayera = this.colorAHex(colorPlayera);
+            if(!this.isHex(colorPantalon)) colorPantalon = this.colorAHex(colorPantalon);
 
             data = {
                 color_piel: colorPiel ? colorPiel : null,
@@ -54,7 +51,7 @@ export default class Form {
             let colorVehiculo = document.querySelector('#colorVehiculo').value;
             let tipoVehiculo = document.querySelector('#tipoVehiculo').value;
 
-            if(this.isHex(colorVehiculo)) colorVehiculo = this.colorAHex(colorVehiculo);
+            if(!this.isHex(colorVehiculo)) colorVehiculo = this.colorAHex(colorVehiculo);
 
             data = {
                 color_vehiculo: colorVehiculo ? colorVehiculo : null,
@@ -65,6 +62,7 @@ export default class Form {
         this.subirReporte(data);
         document.querySelector('#keywords-persona').style.display = 'none';
         document.querySelector('#keywords-coche').style.display = 'none';
+        this.submitBtn.setAttribute('disabled', 'true');
     }
 
     keywordsHandler() {
@@ -205,8 +203,6 @@ export default class Form {
         largoMangas.value = data.largo_mangas;
         largoPantalon.value = data.largo_pantalon;
 
-        console.log(colorPiel.value, colorPlayera.value, largoMangas.value, colorPantalon.value, largoPantalon.value);
-
         this.submitBtn.removeAttribute('disabled');
     }
 
@@ -224,8 +220,6 @@ export default class Form {
         } else colorVehiculo.value = data.color_vehiculo;
 
         tipoVehiculo.value = data.tipo_vehiculo;
-
-        console.log(colorVehiculo.value, tipoVehiculo.value);
 
         this.submitBtn.removeAttribute('disabled');
     }
@@ -254,7 +248,6 @@ export default class Form {
 
     colorAHex(color) {
         color = color.toUpperCase();
-        console.log('COLOR A CONVERTIR: ', color);
 
         const colores = {
             "BLANCO": "#FFFFFF",
@@ -275,17 +268,14 @@ export default class Form {
     }
 
     isHex(color) {
-        console.log('HEX A CONFIRMAR', color);
         if (/^#[0-9a-fA-F]{6}$/.test(color)) return true;
         return false;
     }
 
-    async subirReporte(data) {
-        console.log("DATA A SUBIR: ", data);
-
-        console.log(this.tipoReporte.value)
-
+    async subirReporte(data) {        
         data.bd = this.tipoReporte.value;
+
+        console.log("DATA A SUBIR: ", data);
 
         await fetch('http://127.0.0.1:3002/reporte', {
             method: 'POST',
