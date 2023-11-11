@@ -1,11 +1,11 @@
 :root {
-    --texto: rgba(255, 255, 255, 0.7);
-    --blanco: #fff;
-    --input: #3A3B3C;
-    --input-hover: #4b4d4e;
-    --activo: #3282B8;
-    --gris-claro: #B0B3B8;
-    --fondo-contenido: #1B262C;
+	--texto: rgba(255,255,255, .7);
+	--blanco: #fff;
+	--input: #3A3B3C;
+	--input-hover: #4b4d4e;
+	--activo: #2D88FF;
+	--gris-claro: #B0B3B8;
+	--fondo-contenido: #242526;
 }
 
 * {
@@ -15,19 +15,39 @@
 }
 
 body {
-    background-image: url(../img/sirenas.jpg);
+    background: #18191A;
 	color: var(--blanco);
-}
-
-.header {
-	margin-top: 40px;
-	height:100px;
 }
 
 .formulario {
-	padding: 40px;
+	padding: 20px;
 	background: var(--fondo-contenido);
 	color: var(--blanco);
+	border-radius: 50px;
+}
+
+.cuadro {
+    height: 150px;
+    resize: none;
+	background: var(--input);
+	color: var(--blanco);
+}
+
+.form-control {
+    font-size: 0.8rem;
+    padding: 0.1rem 0.2rem;
+    height: 2rem;
+	background: var(--input);
+	color: var(--blanco);
+}
+
+.form-control:hover {
+	background: var(--input-hover);
+	color: var(--blanco);
+}
+
+.form-control :hover {
+	background: var(--input-hover);
 }
 
 #hidden-div {
