@@ -1,0 +1,37 @@
+:root {
+	--texto: rgba(255,255,255, .7);
+	--blanco: #fff;
+	--input: #3A3B3C;
+	--input-hover: #4b4d4e;
+	--activo: #3282B8;
+	--gris-claro: #B0B3B8;
+	--fondo-contenido: #1B262C;
+}
+
+* {
+	margin: 0;
+	padding: 0;
+	box-sizing: border-box;
+}
+
+body {
+	background: var(--blanco);
+	color: var(--input);
+}
+
+header {
+	background: var(--fondo-contenido);
+}
+
+form {
+	padding: 100px;
+}
+
+form .cuadro {
+	min-height: 300px;
+	max-height: 500px;
+}
+
+#hidden-div {
+	display: none;
+}
