@@ -16,6 +16,7 @@ body {
 	background: var(--fondo-contenido);
 	height: 100vh;
 	display: flex;
+	font-size: 1.3rem;
 	flex-direction: column;
 }
 

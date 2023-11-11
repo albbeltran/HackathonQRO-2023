@@ -21,6 +21,7 @@ body {
 .aside {
 	background: var(--fondo-contenido);
 	height: 100vh;
+	font-size: 1.3rem;
 	display: flex;
     flex-direction: column;
 }
