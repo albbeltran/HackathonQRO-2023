@@ -1,9 +1,11 @@
 import dotenv from 'dotenv';
 dotenv.config();
 import OpenAI from 'openai';
+import { OPENAI_KEY } from '/constants/.environment';
 
 const openai = new OpenAI({
-    apiKey: process.env.OPENAI_KEY
+    apiKey: OPENAI_KEY,
+    dangerouslyAllowBrowser: true
 })
 
 export async function executeMessage(palabras_clave, descripcion) {
