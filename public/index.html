@@ -22,8 +22,7 @@
                         <div class="row-style row form-group">
                             <div class="col-4">
                                 <label class="titulo" for="FormControlSelect">Selecciona una opción: </label>
-                                <select class="form-control" id="FormControlSelect"
-                                    onchange="showDiv('hidden-div', this)">
+                                <select class="form-control" id="FormControlSelect" onchange="toggleDiv()">
                                     <option value="coche">Coche</option>
                                     <option value="persona">Persona</option>
                                 </select>
@@ -159,8 +158,12 @@
         crossorigin="anonymous"></script>
     <script src="main-bundled.js"></script>
     <script>
-        function showDiv(divId, element) {
-            // document.getElementById(divId).style.display = element.value == 'coche' ? 'none' : 'block';
+        function toggleDiv() {
+            const select = document.querySelector('#FormControlSelect');
+            document.querySelector('#descripcion').value = '';
+
+            if (select.value === 'coche') document.querySelector('#keywords-persona').style.display = 'none';
+            else if (select.value === 'persona') document.querySelector('#keywords-coche').style.display = 'none';
         }
     </script>
 </body>
