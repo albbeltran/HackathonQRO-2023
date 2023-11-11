@@ -34,9 +34,9 @@ export default class Form {
             let colorPantalon = document.querySelector('#colorPantalon').value;
             let largoPantalon = document.querySelector('#largoPantalon').value;
 
-            if(!this.isHex(colorPiel)) colorPiel = this.colorAHex(colorPiel);
-            if(!this.isHex(colorPlayera)) colorPlayera = this.colorAHex(colorPlayera);
-            if(!this.isHex(colorPantalon)) colorPantalon = this.colorAHex(colorPantalon);
+            if (!this.isHex(colorPiel)) colorPiel = this.colorAHex(colorPiel);
+            if (!this.isHex(colorPlayera)) colorPlayera = this.colorAHex(colorPlayera);
+            if (!this.isHex(colorPantalon)) colorPantalon = this.colorAHex(colorPantalon);
 
             data = {
                 color_piel: colorPiel ? colorPiel : null,
@@ -51,7 +51,7 @@ export default class Form {
             let colorVehiculo = document.querySelector('#colorVehiculo').value;
             let tipoVehiculo = document.querySelector('#tipoVehiculo').value;
 
-            if(!this.isHex(colorVehiculo)) colorVehiculo = this.colorAHex(colorVehiculo);
+            if (!this.isHex(colorVehiculo)) colorVehiculo = this.colorAHex(colorVehiculo);
 
             data = {
                 color_vehiculo: colorVehiculo ? colorVehiculo : null,
@@ -193,7 +193,7 @@ export default class Form {
         if (data.color_playera) {
             colorPlayeraNombre = this.hexANombre(data.color_playera);
             colorPlayera.value = colorPlayeraNombre;
-        } else colorPiel.value = data.color_playera;
+        } else colorPlayera.value = data.color_playera;
 
         if (data.color_pantalon) {
             colorPantalonNombre = this.hexANombre(data.color_pantalon);
@@ -225,7 +225,7 @@ export default class Form {
     }
 
     hexANombre(hex) {
-        if(!this.isHex(hex)) return null;
+        if (!this.isHex(hex)) return null;
 
         const colores = {
             "#FFFFFF": "BLANCO",
@@ -272,7 +272,7 @@ export default class Form {
         return false;
     }
 
-    async subirReporte(data) {        
+    async subirReporte(data) {
         data.bd = this.tipoReporte.value;
 
         console.log("DATA A SUBIR: ", data);
