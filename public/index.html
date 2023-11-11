@@ -45,16 +45,16 @@
                                 </div>
                                 <div class="row">
                                     <div class="col-6">
-                                        <label for="FormControlSelect">Color de Piel</label>
-                                        <select class="form-control">
+                                        <label for="ColorPiel">Color de Piel</label>
+                                        <select class="form-control" id="ColorPiel">
                                             <option>...</option>
                                             <option value="0">Blanco</option>
                                             <option value="1">Negro</option>
                                         </select>
                                     </div>
                                     <div class="col-6">
-                                        <label>Color de Playera</label>
-                                        <select class="form-control">
+                                        <label for="ColorPlayera">Color de Playera</label>
+                                        <select class="form-control" id="ColorPlayera">
                                             <option>...</option>
                                             <option value="0">Rojo</option>
                                             <option value="1">Azul</option>
@@ -72,8 +72,8 @@
                                 <br>
                                 <div class="row">
                                     <div class="col-6">
-                                        <label>Largo de Manga</label>
-                                        <select class="form-control">
+                                        <label for="LargoManga">Largo de Manga</label>
+                                        <select class="form-control" id="LargoManga">
                                             <option>...</option>
                                             <option value="0">Inexistente</option>
                                             <option value="1">Corto</option>
@@ -81,8 +81,8 @@
                                         </select>
                                     </div>
                                     <div class="col-6">
-                                        <label>Color de Pantalón</label>
-                                        <select class="form-control">
+                                        <label for="ColorPantalon">Color de Pantalón</label>
+                                        <select class="form-control" id="ColorPantalon">
                                             <option>...</option>
                                             <option value="0">Rojo</option>
                                             <option value="1">Azul</option>
@@ -100,8 +100,8 @@
                                 <br>
                                 <div class="row">
                                     <div class="col-6">
-                                        <label>Largo de Pantalón</label>
-                                        <select class="form-control">
+                                        <label for="LargoPantalon">Largo de Pantalón</label>
+                                        <select class="form-control" id="LargoPantalon">
                                             <option>...</option>
                                             <option value="0">Corto</option>
                                             <option value="1">Largo</option>
@@ -119,7 +119,12 @@
     </div>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
-    <script src="../scripts/script.js"></script>
+    <script src="main-bundled.js"></script>
+    <script>
+        function showDiv(divId, element) {
+            document.getElementById(divId).style.display = element.value == 'coche' ? 'none' : 'block';
+        }
+    </script>
 </body>
 
 </html>
