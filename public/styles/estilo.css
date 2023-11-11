@@ -32,11 +32,13 @@ a {
 
 main {
 	background: var(--blanco);
+	padding-left: 5rem;
 	height: 100vh;
 	display: flex;
-    flex-direction: column;
+    /* flex-direction: column;
     align-items: center;
-    justify-content: center;
+    justify-content: center; */
+	margin-top: 3rem;
 }
 
 /* FORMULARIO */
