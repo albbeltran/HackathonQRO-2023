@@ -18,7 +18,7 @@ body {
 	color: var(--blanco);
 }
 
-aside {
+.aside {
 	background: var(--fondo-contenido);
 	height: 100vh;
 	display: flex;
