@@ -21,7 +21,7 @@
                         <div class="row-style row form-group">
                             <div class="col-4">
                                 <label class="titulo" for="FormControlSelect">Selecciona una opción: </label>
-                                <select class="control" id="FormControlSelect" onchange="toggleDiv()">
+                                <select class="control mt-3" id="FormControlSelect" onchange="toggleDiv()">
                                     <option value="coche">Coche</option>
                                     <option value="persona">Persona</option>
                                 </select>
@@ -125,12 +125,14 @@
                                     <div class="col-6">
                                         <label for="colorPiel">Color del vehiculo</label>
 
-                                        <input type="text" name="" id="colorVehiculo">
+                                        <div class="control">
+                                            <input type="text" name="" id="colorVehiculo">
+                                        </div>
                                     </div>
 
                                     <div class="col-6">
                                         <label for="tipoVehiculo">Tipo de vehículo</label>
-                                        <select class="form-control" id="tipoVehiculo">
+                                        <select class="control" id="tipoVehiculo">
                                             <option>...</option>
                                             <option value="0">Motocicleta</option>
                                             <option value="1">Coche</option>
